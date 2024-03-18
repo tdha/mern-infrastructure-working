@@ -24,10 +24,12 @@ const SignUpForm = ({ setUser, showSignup, setShowSignup }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const user = await signUp(userData);
+            // Exclude error and confirm properties from userData when submitting
+            const { error, confirm, ...formData } = userData;
+            const user = await signUp(formData);
             setUser(user);
         } catch {
-            setError('Sign Up Failed - Try Again');
+            setError('Sign up failed. Please try again.');
         }
     }
 
