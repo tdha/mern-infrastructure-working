@@ -1,6 +1,6 @@
 import { useState } from 'react';
-// import { signUp } from '../../utilities/users-services';
-import './SignUpForm.css';
+import { signUp } from '../../utilities/users-services';
+// import './SignUpForm.css';
 import { Link } from 'react-router-dom';
 
 const SignUpForm = ({ setUser, showSignup, setShowSignup }) => {
@@ -28,6 +28,7 @@ const SignUpForm = ({ setUser, showSignup, setShowSignup }) => {
             const { error, confirm, ...formData } = userData;
             const user = await signUp(formData);
             setUser(user);
+            console.log(user)
         } catch {
             setError('Sign up failed. Please try again.');
         }
@@ -37,7 +38,7 @@ const SignUpForm = ({ setUser, showSignup, setShowSignup }) => {
 
     return (
             <div>
-                <div className="signup-container">
+                <div className="form-container">
                     <h1 style={{ marginBottom: '1em' }}>{showSignup ? 'Sign Up Page' : 'Log In Page'}</h1>
                     <form autoComplete="off" onSubmit={handleSubmit}>
                         <div className='username'>
@@ -62,53 +63,3 @@ const SignUpForm = ({ setUser, showSignup, setShowSignup }) => {
 }
 
 export default SignUpForm;
-
-// import { Component } from "react";
-
-// class SignUpForm extends Component {
-
-//     state = {
-//         name: '',
-//         email: '',
-//         password: '',
-//         confirm: '',
-//         error: ''
-//     }
-
-//     handleChange = (evt) => {
-//         this.setState({
-//             [evt.target.name]: evt.target.value,
-//             error: ''
-//         });
-//     };
-
-//     handleSubmit = (evt) => {
-//         evt.preventDefault();
-//         alert(JSON.stringify(this.state));
-//     }
-
-//     render() {
-//     const disable = this.state.password !== this.state.confirm;
-//     return (
-//         <div>
-//         <div className="form-container">
-//             <form autoComplete="off" onSubmit={this.handleSubmit}>
-//             <label>Name</label>
-//             <input type="text" name="name" value={this.state.name} onChange={this.handleChange} required />
-//             <label>Email</label>
-//             <input type="email" name="email" value={this.state.email} onChange={this.handleChange} required />
-//             <label>Password</label>
-//             <input type="password" name="password" value={this.state.password} onChange={this.handleChange} required />
-//             <label>Confirm</label>
-//             <input type="password" name="confirm" value={this.state.confirm} onChange={this.handleChange} required />
-//             <button type="submit" disabled={disable}>SIGN UP</button>
-//             </form>
-//         </div>
-//         <p className="error-message">&nbsp;{this.state.error}</p>
-//         </div>
-//     );
-//     }
-
-// }
-
-// export default SignUpForm 
