@@ -1,18 +1,5 @@
 const jwt = require('jsonwebtoken');
-const Users = require('../../models/user');
-
-// V2 DEBUGGING
-// const create = async (req, res) => {
-//     console.log(req.body); // Log request body to see what's being received
-//     // user creation logic
-//     res.json({
-//         user: {
-//             name: req.body.name,
-//             email: req.body.email
-//         }
-//     });
-//     console.log("User created:", req.body.name); // Confirm response
-// };
+const User = require('../../models/user');
 
 
 // V3
@@ -20,6 +7,7 @@ async function create(req, res) {
     try {
       // Add the user to the database
       const user = await User.create(req.body);
+      console.log(user);
       // token will be a string
       const token = createJWT(user);
       // Yes, we can use res.json to send back just a string
@@ -28,6 +16,7 @@ async function create(req, res) {
     } catch (err) {
       // Client will check for non-2xx status code 
       // 400 = Bad Request
+      console.log(err);
       res.status(400).json(err);
     }
   }

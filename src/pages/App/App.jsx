@@ -23,7 +23,7 @@ function App() {
         </Routes>
         </>
         :
-        <AuthPage /> // is not logged in, go here (falsy)
+        <AuthPage setUser={ setUser}/> // is not logged in, go here (falsy)
     }
     </main>
   );
