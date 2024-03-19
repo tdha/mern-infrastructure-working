@@ -1,24 +1,29 @@
 import * as usersAPI from './users-api';
 
 export async function signUp(userData) {
-    const token = await usersAPI.signUp(userData);
+
+  const token = await usersAPI.signUp(userData);
+    localStorage.setItem('token', token);
+    return getUser();
+  }
+
+  export function logOut() {
+      localStorage.removeItem('token');
+  }
+
+  export function getToken() {
+    const token = localStorage.getItem('token'); // getItem returns null if there's no string
+    if (!token) return null;
+    const payload = JSON.parse(atob(token.split('.')[1])); // Obtain the payload of the token
+    if (payload.exp < Date.now() / 1000) { // A JWT's exp is expressed in seconds, not milliseconds, so convert
+      localStorage.removeItem('token'); // Token has expired - remove it from localStorage
+      return null;
+    }
     return token;
-}
+  }
+  
+  export function getUser() {
+    const token = getToken();
+    return token ? JSON.parse(atob(token.split('.')[1])).user : null; // If there's a token, return the user in the payload, otherwise return null
 
-// V2 DEBUGGING
-// import * as usersAPI from './users-api';
-
-// export async function signUp(userData) {
-//     try {
-//         // Attempt to sign up and receive either a token or user data
-//         const response = await usersAPI.signUp(userData);
-//         // Log for debugging;
-//         console.log(response);
-//         // Assuming response contains a token directly; adjust based on actual structure
-//         return response;
-//     } catch (error) {
-//         console.error("Signup error:", error);
-//         // Consider how you want to handle this error. Maybe return null or throw it again.
-//         throw error;
-//     }
-// }
+  }

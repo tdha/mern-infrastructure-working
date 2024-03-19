@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { getUser } from '../../utilities/users-services';
 
 import './App.css';
 
@@ -10,20 +11,20 @@ import OrderHistoryPage from '../OrderHistoryPage/OrderHistoryPage';
 import NavBar from '../../components/NavBar/NavBar';
 
 function App() {
-  const [user, setUser] = useState(null); // null (falsey) or {} (truthy)
+  const [user, setUser] = useState(getUser());
 
   return (
     <main className='App'>
         { user ? // if user
         <>
-        <NavBar />
+        <NavBar user={ user } setUser={ setUser } />
         <Routes>
             <Route path="/orders/new" element={ <NewOrderPage />} /> 
             <Route path="/orders" element={ <OrderHistoryPage />} /> 
         </Routes>
         </>
         :
-        <AuthPage setUser={ setUser}/> // is not logged in, go here (falsy)
+        <AuthPage setUser={ setUser }/> // is not logged in, go here (falsy)
     }
     </main>
   );
