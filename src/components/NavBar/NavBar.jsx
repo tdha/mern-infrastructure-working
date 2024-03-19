@@ -4,8 +4,8 @@ import * as userService from '../../utilities/users-services'
 function NavBar({ user, setUser }) {
 
     function handleLogOut() {
-        userService.logOut(); // Delegate to the users-service
-        setUser(null); // Update state will also cause a re-render
+        userService.logOut();
+        setUser(null);
     }
 
     return (

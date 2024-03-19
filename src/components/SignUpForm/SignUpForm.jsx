@@ -55,7 +55,7 @@ const SignUpForm = ({ setUser, showSignup, setShowSignup }) => {
                     </div>
                     <button className='signup-button' type="submit" disabled={disable}>SIGN UP</button>
                 </form>
-                <p>Already have an account and want to login, click <Link onClick={() => setShowSignup(!showSignup)}>here</Link></p>
+                <p>Already have an account and want to log in, click <Link onClick={() => setShowSignup(!showSignup)}>here</Link></p>
             </div>
             <p className="error-message">{error}</p>
         </div>

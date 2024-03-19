@@ -9,6 +9,19 @@ export async function signUp(userData) {
     if (res.ok) {
         return res.json();
     } else {
-        throw new Error('Invalid Sign Up');
+        throw new Error('Invalid Sign up.');
+    }
+}
+
+export async function login(credentials) {
+    const res = await fetch(BASE_URL + '/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(credentials)
+    });
+    if (res.ok) {
+        return res.json();
+    } else {
+        throw new Error('Invalid Log in.');
     }
 }
