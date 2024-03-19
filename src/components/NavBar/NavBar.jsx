@@ -21,4 +21,4 @@ function NavBar({ user, setUser }) {
     );
 }
 
-export default NavBar
+export default NavBar;
